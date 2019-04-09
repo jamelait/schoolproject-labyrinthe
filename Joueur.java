@@ -72,72 +72,8 @@ class Joueur {
 	/*
 	 * Implante un tour de jeu d'un joueur.
 	 */
-	public void joue(JeuDuLabyrinthe jdl){
-		// a transformer.
-		// Pour l'instant cette methode doit 
-		// demander où le joueur  veut inserer la tuile sortie, et dans quel sens, et faire l'insertion 
-		// de la tuile dans le labyrinthe si les coordonnees entrees sont correctes.
-		// on ne s'occuppe pas de deplacer les pions, ni de prendre des tresors.
-
-		int nbTour; // nombre de quarts de tours
-		String coordonnees; // saisie du joueur
-		Point destination; // la ou veut se deplacer le joueur
-		int[] xy; // abscisse et ordonne sous forme d'indice
-		
-		//System.out.println("\n"+nom.toUpperCase()+" -> Joueur "+(numJoueur+1)+" -> Pion "+(numJoueur+1)+" :");
-		
-		if (!paquet.isEmpty()) {
-			System.out.println("\n\tTresor a trouver : " + paquet.get(0) +"\n");
-		}
-		else { // sinon on lui dit de retourner a sa position initiale
-			System.out.println("\nVous n'avez plus de tresors !!! Retournez en "+positionDepart+" pour gagner la partie !!!");
-		}
-		nbTour = Clavier.lireEntierDansIntervalle("Tourner la tuile combien de fois (quarts de tours, dans le sens des aiguilles d'une montre) ? ",0,3);
-
-		// on fait tourner la tuile et on l'affiche
-		plateau.getTuileSortie().tourne(nbTour);
-		System.out.println("\tVotre tuile sortie : ");
-		System.out.println(plateau.getTuileSortie() +"\n");
-
-		// le joueur choisit ou inserer la tuile
-		do {
-			coordonnees = Coordonnees.lireCoordonnees("Inserer la tuile en : ",COORMIN,COORMAX);
-			xy = Coordonnees.coordonneesEnIndice(coordonnees);
-		// on insere la tuile dans le labyrinthe
-		} while(!plateau.insererTuile(xy[0], xy[1], jdl));
-		
-		System.out.println(plateau);
-		
-		// le joueur choisit ou il veut se deplacer
-		System.out.println("\nSaisir votre position actuelle pour rester a la meme place.");
-		do {
-			if (!paquet.isEmpty()) {
-				System.out.println("\n\tTresor a trouver : " + paquet.get(0));
-			}
-			System.out.println("\tPosition actuelle : "+position);
-			coordonnees = Coordonnees.lireCoordonnees("Deplacer votre pion en : ",COORMIN,COORMAX);
-			xy = Coordonnees.coordonneesEnIndice(coordonnees);
-			destination = new Point(xy[0], xy[1]);
-		// on deplace le pion du joueur
-		} while(!plateau.deplacerPion(position,destination,numJoueur));
-		position = destination; // la position du joueur change
-		
-		System.out.println(plateau);
-		
-		if (!paquet.isEmpty()) { // s'il reste des tresors au joueurs
-			// si la tuile, ou se trouve maintenant le joueur, contient le tresor d'indice 0, on le retire de la tuile
-			if (plateau.getTuile(xy[0], xy[1]).retirerTresor(paquet.get(0))) {
-				// on retire le tresor d'indice 0 du paquet
-				System.out.println("\tVous avez ramasse le tresor : " + paquet.remove(0));
-				System.out.println("\tIl vous reste " + paquet.size() + " tresors a ramasser.");
-			}
-		}
-
-		//Console.readLine("\nAppuyez sur ENTREE...");
-		System.out.println("\nAppuyez sur ENTREE...");
-		Clavier.lireString();
-	}
-
+	public void joue(JeuDuLabyrinthe jdl){}
+	
 	/*
 	 * 	 verifie si le joueur a gagne.
 	 */

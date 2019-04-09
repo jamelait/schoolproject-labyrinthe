@@ -214,10 +214,10 @@ public class Plateau {
 		ArrayList<Point> pointsAccessibles = new ArrayList<Point>(); // liste des points accessibles a partir du point de depart
 		ArrayList<Point> pointsAccessiblesNonTraites = new ArrayList<Point>(); // idem, dont il faut encore trouver les voisins
 		Point origine; // point dont on va tester les directions possibles
-		Point tuileD; // // coordonnees de la tuile situee a droite
-		Point tuileG; // a gauche
-		Point tuileH; // en haut
-		Point tuileB; // en bas  de origine, vaut null si non accessible a partir de origine
+		Point tuileD; // coordonnees de la tuile situee a droite ...
+		Point tuileG; // ... a gauche ...
+		Point tuileH; // ... en haut ...
+		Point tuileB; // ... en bas  de origine, vaut null si non accessible a partir de origine
 		boolean possible = false; // vaut vrai s'il existe un chemin
 
 		pointsAccessiblesNonTraites.add(depart);
@@ -260,24 +260,31 @@ public class Plateau {
 		// si le point arrivee est dans pointsAccessiblesNonTraites c'est qu'il existe un chemin
 		if (pointsAccessiblesNonTraites.contains(arrivee)) {
 			possible = true;
+			pointsAccessibles.add(arrivee);
+System.out.println("liste pointsAccessibles = " + pointsAccessibles);
 		}
 		return possible;
 	}
 	
 	public boolean deplacerPion(Point depart, Point arrivee, int numJoueur){
+
 		boolean deplacer=false;
-		Tuile tuileDepart;
-		Tuile tuileArrivee;		
+		Tuile tuileDepart = null;
+		Tuile tuileArrivee = null;
 
 		if(!depart.equals(arrivee)){
 			if (cheminPossible(depart, arrivee)){
 				tuileDepart = labyrinthe[depart.getX()][depart.getY()];
 				tuileArrivee = labyrinthe[arrivee.getX()][arrivee.getY()];
+// System.out.println("Le pion va etre retire en "+depart + tuileDepart.getPions());
 				tuileDepart.retirerPion(numJoueur);
+// System.out.println("pion retire en "+depart + tuileDepart.getPions());
+// System.out.println("Le pion va etre pose en "+arrivee + tuileArrivee.getPions());
 				tuileArrivee.poserPion(numJoueur);
+// System.out.println("pion pose en "+arrivee + tuileArrivee.getPions());
 				deplacer=true;
 			}else{
-				System.out.println("\tVotre chemin n'est pas possible.");
+				/*System.out.println("\tVotre chemin n'est pas possible.");*/
 			}
 		}else{
 			System.out.println("\tVous souhaitez rester a la meme place.\n");
@@ -466,7 +473,7 @@ public class Plateau {
 	}
 		
 	
-	public void bougerPions(ArrayList<Integer> pions, JeuDuLabyrinthe jdl, int x, int y) {
+	private void bougerPions(ArrayList<Integer> pions, JeuDuLabyrinthe jdl, int x, int y) {
 	// pose tout les pions de la liste sur une autre tuile
 		
 		// la nouvelle position du joueurs

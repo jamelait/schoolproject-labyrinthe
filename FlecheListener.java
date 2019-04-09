@@ -8,6 +8,7 @@ class FlecheListener implements MouseListener{
 	private JeuDuLabyrinthe jdl;
 	private VuePlateau vp;
 	
+	int messageCourant = -1;
 	
 	public FlecheListener(int x, int y, JeuDuLabyrinthe jdl) {
 		//coordonnes de la fleche cliquee
@@ -34,14 +35,19 @@ class FlecheListener implements MouseListener{
 				jdl.z.afficher(ZoneMessage.DEPLACER);
 			}
 		}
-		else {
-			jdl.z.afficher(ZoneMessage.PLUS_INSERER);
-		}
 	}
 	
 	public  void mouseEntered(MouseEvent e) {
+		if (!jdl.peutInserer) {
+			messageCourant = jdl.z.getMessageCourant();
+			jdl.z.afficher(ZoneMessage.PLUS_INSERER);
+		}
 	}
 	 public void mouseExited(MouseEvent e) {
+		if (!jdl.peutInserer && messageCourant >= 0) {
+			jdl.z.afficher(messageCourant);
+			messageCourant = -1;
+		}
 	}
 	 public void mousePressed(MouseEvent e)  {
 	}

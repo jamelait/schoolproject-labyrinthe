@@ -3,7 +3,7 @@ import javax.swing.*;
 
 public class PInfo extends JPanel{
 	
-	final static String REP = "./images/tresors/";
+	final static String REP = "./images/tresors/big/";
 	private JeuDuLabyrinthe jdl;
 	private JLabel nomJoueur;
 	private JLabel tresorRestant;
@@ -15,11 +15,19 @@ public class PInfo extends JPanel{
 		tresorATrouver = new JLabel();
 		tresorRestant = new JLabel();
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));// pour que les elements soit en colonne.
+		
+		Dimension espace = new Dimension(0,20);
+			add(Box.createRigidArea(espace)); // espace entre les differents label
 		add(new JLabel ("NOM DU JOUEUR : "));
+			add(Box.createRigidArea(espace));
 		add(nomJoueur);
+			add(Box.createRigidArea(espace));
 		add(new JLabel ("TRESOR A TROUVER : "));
+			add(Box.createRigidArea(espace));
 		add(tresorATrouver);
+			add(Box.createRigidArea(espace));
 		add(new JLabel ("NOMBRE DE TRESOR RESTANT : "));
+			add(Box.createRigidArea(espace));
 		add(tresorRestant);
 		
 		setBackground(JeuDuLabyrinthe.couleurFond);

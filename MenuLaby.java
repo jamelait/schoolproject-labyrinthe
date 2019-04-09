@@ -66,7 +66,8 @@ class MenuLaby extends JMenuBar implements ActionListener {
 			jdl.afficherClassement();
 		}
 		else if (commande == "Quitter") {
-			System.exit(0);
+			if (DialogLaby.question("Quitter la partie en cours ?","Quitter"))
+				System.exit(0);
 		}
 		else if (commande == "Classique") {
 			jdl.setDossierTuiles("./images/tuiles/classique/");

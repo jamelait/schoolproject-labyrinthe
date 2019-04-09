@@ -22,6 +22,7 @@ class TuileListener implements MouseListener {
 		// si le joueur a le droit de se deplacer, ca veut dire qu'il a insere sa tuile
 		if (jdl.peutDeplacer) {
 			Joueur j = jdl.getJoueurActif();
+// System.out.println("ma position : " + j.getPosition());
 			// si le joueur est deplace
 			if (jdl.getPlateau().deplacerPion(j.getPosition(),p,jdl.getindJoueurActif())) {
 				j.setPosition(p);
@@ -31,17 +32,19 @@ class TuileListener implements MouseListener {
 				}
 				// le joueur a ete deplace, on actualise le plateau
 				jdl.getVuePlateau().actualiser();
+				// message : tourner et inserer la tuile a l'intention du joueur suivant
+				jdl.z.afficher(ZoneMessage.TOURNER_INSERER);
 				// on passe au joueur suivant, qui a le droit d'inserer la tuile, mais pas de se deplacer
 				jdl.joueurSuivant();
 				jdl.peutDeplacer = false;
 				jdl.peutInserer = true;
-				// message : tourner et inserer la tuile
-				jdl.z.afficher(ZoneMessage.TOURNER_INSERER);
 			}
 			// le joueur ne peut pas se deplacer sur la tuile cliquee pour cause d'obstacles, on le lui dit
 			else {
 				jdl.z.afficher(ZoneMessage.OBSTACLES);
 			}
+// System.out.println("ma position : " + j.getPosition());
+
 		}
 		// le joueur n'a pas le droit de se deplacer, on le lui dit
 		else {

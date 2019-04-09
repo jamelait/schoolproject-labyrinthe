@@ -100,8 +100,9 @@ class DialogLaby extends JDialog implements ActionListener {
 	*/
 	public Integer askNbJoueurs() {
 		
-		Integer[] tabNbJoueurs = {2,3,4};
-		JOptionPane jop = new JOptionPane(), jop2 = new JOptionPane();
+		Integer[] tabNbJoueurs = {1,2,3,4};
+		//JOptionPane jop = new JOptionPane(), jop2 = new JOptionPane();
+		JOptionPane jop = new JOptionPane();
 		// affichage de la boite de dialogue et affection du choix a la variable nb
 		Integer nb = (Integer)jop.showInputDialog(null,"Combien de joueurs ?","Nombre de joueurs",
 		JOptionPane.QUESTION_MESSAGE,
@@ -133,7 +134,18 @@ class DialogLaby extends JDialog implements ActionListener {
 		setModal(true);
 		setVisible(true);
 	}
-
+	
+	public static boolean question(String message, String titre) {
+		JOptionPane jop = new JOptionPane();
+		int option = jop.showConfirmDialog(null, message, titre, JOptionPane.YES_NO_OPTION,
+		JOptionPane.QUESTION_MESSAGE);
+			
+		if(option == JOptionPane.OK_OPTION)
+			return true;
+		else
+			return false;
+	}
+	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand() == "Valider") {
 			setVisible(false);

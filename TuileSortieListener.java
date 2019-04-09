@@ -9,6 +9,8 @@ class TuileSortieListener implements MouseListener {
 	private Tuile tuile;
 	private JeuDuLabyrinthe jdl;
 	private VuePlateau vp;
+	
+	int messageCourant = -1;
 
 	public TuileSortieListener(Tuile tuile,JeuDuLabyrinthe jdl) {
 		 this.tuile = tuile;
@@ -21,14 +23,19 @@ class TuileSortieListener implements MouseListener {
 			tuile.tourne(1);
 			vp.dessinerPanelTuileSortie();
 		}
-		else {
-			jdl.z.afficher(ZoneMessage.PLUS_TOURNER);
-		}
 	}
 	
 	public  void mouseEntered(MouseEvent e) {
+		if (!jdl.peutInserer) {
+			messageCourant = jdl.z.getMessageCourant();
+			jdl.z.afficher(ZoneMessage.PLUS_TOURNER);
+		}
 	}
-	public void mouseExited(MouseEvent e) {
+	 public void mouseExited(MouseEvent e) {
+		if (!jdl.peutInserer && messageCourant >= 0) {
+			jdl.z.afficher(messageCourant);
+			messageCourant = -1;
+		}
 	}
 	public void mousePressed(MouseEvent e)  {
 	}

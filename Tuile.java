@@ -300,7 +300,7 @@ class Tuile {
 	// retourne le nombre de tours qu'a subit une tuile de type carrefour depuis son initialisation
 		int nbFois = -1;
 		
-		// une tuile coude n'a qu'une seule porte fermee
+		// une tuile carrefour n'a qu'une seule porte fermee
 		if (!getPorteNord()) {
 			nbFois = 0;
 		}

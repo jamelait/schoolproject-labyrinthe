@@ -51,7 +51,8 @@ public class JeuDuLabyrinthe {
         fenetre.setJMenuBar(new MenuLaby(this));
 		// configuration de la fenetre
 		fenetre.setVisible(true);
-		fenetre.setSize(855,720);
+		fenetre.setMinimumSize(new Dimension(796,586));
+		fenetre.setSize(800,613);
 		fenetre.setLocationRelativeTo(null);
 		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// creation des joueurs
@@ -63,11 +64,18 @@ public class JeuDuLabyrinthe {
 		// informations du joueur actif		
 		panelInfo = new PInfo(this);
 		
+		// assembler la zone message et le panelInfo
+		JPanel zmInfo = new JPanel(new BorderLayout());
+		
+		zmInfo.add(panelInfo,BorderLayout.NORTH);
+		zmInfo.add(z,BorderLayout.CENTER);
+
 		// ajout des differentes parties au panelPrincipal
 		panelPrincipal = new JPanel(new BorderLayout());
 		panelPrincipal.add(vp,BorderLayout.CENTER);
-		panelPrincipal.add(z,BorderLayout.NORTH);
-		panelPrincipal.add(panelInfo, BorderLayout.WEST);
+		panelPrincipal.add(zmInfo,BorderLayout.EAST);
+		// panelPrincipal.add(z,BorderLayout.EAST);
+		// panelPrincipal.add(panelInfo, BorderLayout.WEST);
 		panelPrincipal.setBackground(couleurFond);
 		fenetre.setContentPane(panelPrincipal);
 		
@@ -78,12 +86,15 @@ public class JeuDuLabyrinthe {
 		
 	}
 
-	public void creerJoueurs(){
-	// cette methode doit afficher des JOptionPane
+	public void creerJoueurs() {
 		DialogLaby dialog = new DialogLaby();
 		try {
 			int n = dialog.askNbJoueurs();
-			joueurs = new Joueur[n];
+			if (n == 1)
+				joueurs = new Joueur[2];
+			else
+				joueurs = new Joueur[n];
+				
 			for (int i = 0 ; i < n ; i++) {
 				dialog.askNomCoul(i);
 				String nom = dialog.getNom();
@@ -92,11 +103,18 @@ public class JeuDuLabyrinthe {
 				}
 				joueurs[i] = new Joueur(nom,i,dialog.getCoul(),plateau);
 			}
+			if (n == 1) {
+				ArrayList<Character> listeCoul = new ArrayList<Character>();
+				listeCoul.add('j');listeCoul.add('b');listeCoul.add('v');listeCoul.add('r');
+				listeCoul.remove(new Character(joueurs[0].getCouleur()));
+				joueurs[1] = new JoueurIA("Ordinateur",1,listeCoul.get(0),plateau);
+			}
 		}
 		catch(NullPointerException e) {
 		// si la creation de joueurs n'est pas terminee correctement on quitte la partie
 			System.exit(1);
 		}
+		vp.dessinerPanelPlateau();
 		vp.actualiser();
 	}
 		
@@ -114,6 +132,11 @@ public class JeuDuLabyrinthe {
 				indJoueurActif = 0;
 			}
 			panelInfo.actualiser();
+		}
+
+		if (joueurs[indJoueurActif].getClass().toString().equals("class JoueurIA")) {
+			joueurs[indJoueurActif].joue(this);
+			joueurSuivant();
 		}
 	}
 	
