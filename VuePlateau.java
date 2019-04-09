@@ -13,7 +13,7 @@ class VuePlateau extends JLayeredPane {
 	private JPanel panelPlateau; // panel qui contiendra toutes les tuiles du labyrinthe
 	private JPanel panelTuileSortie; // panel qui contiendra la tuile sortie
 	private JPanel panelFleche; // panel qui contiendra les boutons Fleche qui nous permetrons d'inserer une tuile. 
-	private int[][] positionVueTuile;
+	
 	private Plateau plateau; // permettra de recuperer les tuiles
 	private JeuDuLabyrinthe jdl; // sera envoye en parametre pour la construction de la tuile
 	
@@ -44,38 +44,13 @@ class VuePlateau extends JLayeredPane {
 		dessinerPanelFleche();
 		dessinerPanelPlateau();
 		dessinerPanelTuileSortie();
-		initPositionVueTuile();
+		
 		// configuration du cuseur pour les JPanel
 		Curseur c = new Curseur();
 		panelPlateau.setCursor(c.getCurseur(Curseur.MAIN2));
 		panelTuileSortie.setCursor(c.getCurseur(Curseur.TOURNER));
 		
 	}
-	
-	private void initPositionVueTuile() {
-		int i = 0;
-		positionVueTuile = new int[7][7];
-		
-		for (int y = 0 ; y < 7 ; y += 1) {
-			for (int x = 0 ; x < 7 ; x+= 1) {
-				positionVueTuile[x][y] = i;
-				i++;
-			}
-		}
-	}
-	
-	public void reDessinerPanelPlateau() {
-		VueTuile vueT;
-		for (int y = 0 ; y < 7 ; y += 1) {
-			for (int x = 0 ; x < 7 ; x+= 1) {
-				vueT = (VueTuile) panelPlateau.getComponent(positionVueTuile[x][y]);
-				vueT.majIcon();
-			}
-		}
-		panelPlateau.validate();
-	}
-	
-	
 	
 	/*
 	* creation de toute les tuiles du plateau et ajout des tuiles au panelPlateau
@@ -136,7 +111,7 @@ class VuePlateau extends JLayeredPane {
 	}
 	
 	public void actualiser() {
-		reDessinerPanelPlateau();
+		dessinerPanelPlateau();
 		dessinerPanelTuileSortie();
 		dessinerPanelFleche();
 	}

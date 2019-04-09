@@ -38,7 +38,7 @@ private int nd = 0;
 	public void joue(JeuDuLabyrinthe jdl) {
 // //System.out.println("******************************* deplacement n:"+(++nd));
 // //System.out.println(position);
-
+		attendre();
 		int nbTour;
 		int indice;
 		Point p;
@@ -159,10 +159,10 @@ private int nd = 0;
 		
 		return p;
 	}
-	
+
 	private static void attendre() {
 		try {
-			Thread.currentThread().sleep(3000);
+			Thread.currentThread().sleep(2000);
 		}
 		catch (InterruptedException e) {
 			e.printStackTrace();

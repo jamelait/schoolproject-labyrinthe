@@ -29,11 +29,10 @@ public class PInfo extends JPanel{
 		add(new JLabel ("NOMBRE DE TRESOR RESTANT : "));
 			add(Box.createRigidArea(espace));
 		add(tresorRestant);
-		
+		setForeground(Color.RED);
 		setBackground(JeuDuLabyrinthe.couleurFond);
 	}
 	
-
 
 	public void actualiser(){
 	// actualise le panneau d'information pour le joueur actif	

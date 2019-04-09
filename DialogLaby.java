@@ -101,8 +101,7 @@ class DialogLaby extends JDialog implements ActionListener {
 	public Integer askNbJoueurs() {
 		
 		Integer[] tabNbJoueurs = {1,2,3,4};
-		//JOptionPane jop = new JOptionPane(), jop2 = new JOptionPane();
-		JOptionPane jop = new JOptionPane();
+		JOptionPane jop = new JOptionPane(), jop2 = new JOptionPane();
 		// affichage de la boite de dialogue et affection du choix a la variable nb
 		Integer nb = (Integer)jop.showInputDialog(null,"Combien de joueurs ?","Nombre de joueurs",
 		JOptionPane.QUESTION_MESSAGE,

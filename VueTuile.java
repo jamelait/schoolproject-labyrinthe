@@ -10,7 +10,6 @@ class VueTuile extends JLabel {
 	final static String rep_TRESORS = "./images/tresors/";
 	
 	
-	// private int x,y;
 	private Tuile tuile;
 	private JeuDuLabyrinthe jdl;
 	
@@ -26,12 +25,7 @@ class VueTuile extends JLabel {
 	 * @param estTuileSortie vaut vrai si la tuile qui va etre construite est la tuile sortie, son ecouteur sera different des autres tuiles
      */
 	public VueTuile(Tuile tuile,JeuDuLabyrinthe jdl,int y, int x,boolean estTuileSortie) {
-		// this.x = x;
-		// this.y = y;
 		this.jdl = jdl;
-		if (!estTuileSortie)
-		this.tuile = jdl.getPlateau().getLabyrinthe()[x][y];
-		else
 		this.tuile = tuile;
 		if (tuile.getTresor() != null) {
 			tresor = tuile.getTresor().getNomCourt();
@@ -68,14 +62,9 @@ class VueTuile extends JLabel {
 				break;
 		}
 	}
-	public void majIcon() {
-		genererImage();
-		setIcon(image);
-	}
+	
 	public void paint(Graphics g) {
 		super.paint(g);
-		genererImage();
-		setIcon(image); 
 		
 		// coordonnees pour dessiner les pions
 		int x = 0; 

@@ -2,6 +2,17 @@ class Coordonnees {
 /*
  * Gere la saisie des coordonnees et leur affichage sous forme lisible
 */
+	public static String lireCoordonnees(String message, String coorMin, String coorMax) {
+	// Lit des coordonnees au clavier dans un intervalle de coordonnees.
+		String coorSaisies;
+
+		do {
+			coorSaisies = Console.readLine(message);
+		} while (contientErreurs(coorSaisies, coorMin, coorMax));
+		
+		return coorSaisies;
+	}
+	
 	public static int[] coordonneesEnIndice(String coor) {
 	/*
 	 * Convertit des coordonnees en indices et retourne un tableau de ces indices

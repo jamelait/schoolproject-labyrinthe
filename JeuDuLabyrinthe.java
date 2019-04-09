@@ -26,7 +26,7 @@ public class JeuDuLabyrinthe {
 	//final static Color couleurFond = null;
 
 	private JFrame fenetre;
-	private JPanel panelPrincipal;
+	private Panneau panelPrincipal;
 	private VuePlateau vp;
 	private PInfo panelInfo;
 	
@@ -69,9 +69,9 @@ public class JeuDuLabyrinthe {
 		
 		zmInfo.add(panelInfo,BorderLayout.NORTH);
 		zmInfo.add(z,BorderLayout.CENTER);
-
+		
 		// ajout des differentes parties au panelPrincipal
-		panelPrincipal = new JPanel(new BorderLayout());
+		panelPrincipal = new Panneau(new BorderLayout());
 		panelPrincipal.add(vp,BorderLayout.CENTER);
 		panelPrincipal.add(zmInfo,BorderLayout.EAST);
 		// panelPrincipal.add(z,BorderLayout.EAST);
@@ -83,9 +83,27 @@ public class JeuDuLabyrinthe {
 		indJoueurActif=0;
 		// actualisation du panelInfo avec les informations du joueur actif
 		panelInfo.actualiser();
+		go();
 		
 	}
+	public void go() {
+	    for(int i = -50; i < panelPrincipal.getWidth(); i++)
+	    {
+	            int x = panelPrincipal.getPosX(), y = panelPrincipal.getPosY();
+	            x++;
+	            y++;
+	            panelPrincipal.setPosX(x);
+	            panelPrincipal.setPosY(y);
+	            panelPrincipal.repaint();  
+	            try {
+	                    Thread.sleep(10);
+	            } catch (InterruptedException e) {
+	                    // TODO Auto-generated catch block
+	                    e.printStackTrace();
+	            }
+	    }
 
+}
 	public void creerJoueurs() {
 		DialogLaby dialog = new DialogLaby();
 		try {
@@ -114,7 +132,6 @@ public class JeuDuLabyrinthe {
 		// si la creation de joueurs n'est pas terminee correctement on quitte la partie
 			System.exit(1);
 		}
-		vp.dessinerPanelPlateau();
 		vp.actualiser();
 	}
 		
