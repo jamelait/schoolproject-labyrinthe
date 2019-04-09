@@ -9,7 +9,7 @@ Projet mis à disposition pour information uniquement.
 Exécuter `javaw -jar JeuDuLabyrinthe.jar`.
 
 ## Comment compiler
- Exécuter `javac JeuDuLabyrinthe.java VueTuile.java FlecheLabel.java ReglesDuJeu.java` à 2 reprises.
+ Exécuter `javac JeuDuLabyrinthe.java`.
 
 ## Comment jouer
 Exécuter `java JeuDuLabyrinthe`.
