@@ -17,3 +17,6 @@ Exécuter `java JeuDuLabyrinthe`.
 ## Capture d'écran
 
 ![](./doc/screenshot.png)
+
+## Mode solo
+Voir branche mode-solo.
